@@ -1,0 +1,687 @@
+cd github_yun/YUN-YIZHOU/Boston Housing.csv
+[WinError 267] ディレクトリ名が無効です。: 'github_yun/YUN-YIZHOU/Boston Housing.csv'
+C:\Users\81807
+cd github_yun/YUN-YIZHOU/
+C:\Users\81807\github_yun\YUN-YIZHOU
+ls
+ ドライブ C のボリューム ラベルは Windows です
+ ボリューム シリアル番号は 4C09-EAFA です
+
+ C:\Users\81807\github_yun\YUN-YIZHOU のディレクトリ
+
+2024/06/17  00:55    <DIR>          .
+2024/06/10  01:03    <DIR>          ..
+2024/06/17  00:55    <DIR>          .ipynb_checkpoints
+2024/06/17  00:55            35,735 Boston Housing.csv
+2024/06/10  01:52            11,368 Numpy.ipynb
+2024/06/10  00:51                85 README.md
+               3 個のファイル              47,188 バイト
+               3 個のディレクトリ  51,185,790,976 バイトの空き領域
+with open("Boston Housing.csv", "r") as file:
+  Cell In[8], line 1
+    with open("Boston Housing.csv", "r") as file:
+                                                 ^
+SyntaxError: incomplete input
+with open("Boston Housing.csv", "r") as file
+  Cell In[9], line 1
+    with open("Boston Housing.csv", "r") as file
+                                                ^
+SyntaxError: expected ':'
+with open("Boston Housing.csv", "r") as file:
+  Cell In[10], line 1
+    with open("Boston Housing.csv", "r") as file:
+                                                 ^
+SyntaxError: incomplete input
+data = pd.read_csv("Boston Housing.csv",encoding="utf-8")
+data.shape
+(506, 14)
+data.head()
+crim	zn	indus	chas	nox	rm	age	dis	rad	tax	ptratio	b	lstat	medv
+0	0.00632	18.0	2.31	0	0.538	6.575	65.2	4.0900	1	296	15.3	396.90	4.98	24.0
+1	0.02731	0.0	7.07	0	0.469	6.421	78.9	4.9671	2	242	17.8	396.90	9.14	21.6
+2	0.02729	0.0	7.07	0	0.469	7.185	61.1	4.9671	2	242	17.8	392.83	4.03	34.7
+3	0.03237	0.0	2.18	0	0.458	6.998	45.8	6.0622	3	222	18.7	394.63	2.94	33.4
+4	0.06905	0.0	2.18	0	0.458	7.147	54.2	6.0622	3	222	18.7	396.90	5.33	36.2
+data.columns
+Index(['crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis', 'rad', 'tax',
+       'ptratio', 'b', 'lstat', 'medv'],
+      dtype='object')
+data.describe()
+crim	zn	indus	chas	nox	rm	age	dis	rad	tax	ptratio	b	lstat	medv
+count	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000	506.000000
+mean	3.613524	11.363636	11.136779	0.069170	0.554695	6.284634	68.574901	3.795043	9.549407	408.237154	18.455534	356.674032	12.653063	22.532806
+std	8.601545	23.322453	6.860353	0.253994	0.115878	0.702617	28.148861	2.105710	8.707259	168.537116	2.164946	91.294864	7.141062	9.197104
+min	0.006320	0.000000	0.460000	0.000000	0.385000	3.561000	2.900000	1.129600	1.000000	187.000000	12.600000	0.320000	1.730000	5.000000
+25%	0.082045	0.000000	5.190000	0.000000	0.449000	5.885500	45.025000	2.100175	4.000000	279.000000	17.400000	375.377500	6.950000	17.025000
+50%	0.256510	0.000000	9.690000	0.000000	0.538000	6.208500	77.500000	3.207450	5.000000	330.000000	19.050000	391.440000	11.360000	21.200000
+75%	3.677083	12.500000	18.100000	0.000000	0.624000	6.623500	94.075000	5.188425	24.000000	666.000000	20.200000	396.225000	16.955000	25.000000
+max	88.976200	100.000000	27.740000	1.000000	0.871000	8.780000	100.000000	12.126500	24.000000	711.000000	22.000000	396.900000	37.970000	50.000000
+data.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 506 entries, 0 to 505
+Data columns (total 14 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   crim     506 non-null    float64
+ 1   zn       506 non-null    float64
+ 2   indus    506 non-null    float64
+ 3   chas     506 non-null    int64  
+ 4   nox      506 non-null    float64
+ 5   rm       506 non-null    float64
+ 6   age      506 non-null    float64
+ 7   dis      506 non-null    float64
+ 8   rad      506 non-null    int64  
+ 9   tax      506 non-null    int64  
+ 10  ptratio  506 non-null    float64
+ 11  b        506 non-null    float64
+ 12  lstat    506 non-null    float64
+ 13  medv     506 non-null    float64
+dtypes: float64(11), int64(3)
+memory usage: 55.5 KB
+data.dtypes
+crim       float64
+zn         float64
+indus      float64
+chas         int64
+nox        float64
+rm         float64
+age        float64
+dis        float64
+rad          int64
+tax          int64
+ptratio    float64
+b          float64
+lstat      float64
+medv       float64
+dtype: object
+corr = data.corr()
+sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+corr[""].sort_values(ascending=False)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[19], line 1
+----> 1 sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+      2 corr[""].sort_values(ascending=False)
+
+NameError: name 'sns' is not defined
+corr = data.corr()
+sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+corr[""].sort_values(ascending=False)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[20], line 2
+      1 corr = data.corr()
+----> 2 sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+      3 corr[""].sort_values(ascending=False)
+
+NameError: name 'sns' is not defined
+import seaborn as sns
+corr = data.corr()
+sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+corr[""].sort_values(ascending=False)
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\Lib\site-packages\pandas\core\indexes\base.py:3805, in Index.get_loc(self, key)
+   3804 try:
+-> 3805     return self._engine.get_loc(casted_key)
+   3806 except KeyError as err:
+
+File index.pyx:167, in pandas._libs.index.IndexEngine.get_loc()
+
+File index.pyx:196, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\\_libs\\hashtable_class_helper.pxi:7081, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\\_libs\\hashtable_class_helper.pxi:7089, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: ''
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[22], line 3
+      1 corr = data.corr()
+      2 sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+----> 3 corr[""].sort_values(ascending=False)
+
+File ~\anaconda3\Lib\site-packages\pandas\core\frame.py:4090, in DataFrame.__getitem__(self, key)
+   4088 if self.columns.nlevels > 1:
+   4089     return self._getitem_multilevel(key)
+-> 4090 indexer = self.columns.get_loc(key)
+   4091 if is_integer(indexer):
+   4092     indexer = [indexer]
+
+File ~\anaconda3\Lib\site-packages\pandas\core\indexes\base.py:3812, in Index.get_loc(self, key)
+   3807     if isinstance(casted_key, slice) or (
+   3808         isinstance(casted_key, abc.Iterable)
+   3809         and any(isinstance(x, slice) for x in casted_key)
+   3810     ):
+   3811         raise InvalidIndexError(key)
+-> 3812     raise KeyError(key) from err
+   3813 except TypeError:
+   3814     # If we have a listlike key, _check_indexing_error will raise
+   3815     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3816     #  the TypeError.
+   3817     self._check_indexing_error(key)
+
+KeyError: ''
+
+sns.scatterplot(ax=axes[0, 0], x='', y='', data=data)axes[0, 0].set_title('')
+  Cell In[23], line 1
+    sns.scatterplot(ax=axes[0, 0], x='', y='', data=data)axes[0, 0].set_title('')
+                                                         ^
+SyntaxError: invalid syntax
+df.hist(bins=50,figsize=(20,15))
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[24], line 1
+----> 1 df.hist(bins=50,figsize=(20,15))
+
+NameError: name 'df' is not defined
+df = pd.read_csv("Boston Housing.csv")
+df.hist(bins=50,figsize=(20,15))
+array([[<Axes: title={'center': 'crim'}>, <Axes: title={'center': 'zn'}>,
+        <Axes: title={'center': 'indus'}>,
+        <Axes: title={'center': 'chas'}>],
+       [<Axes: title={'center': 'nox'}>, <Axes: title={'center': 'rm'}>,
+        <Axes: title={'center': 'age'}>, <Axes: title={'center': 'dis'}>],
+       [<Axes: title={'center': 'rad'}>, <Axes: title={'center': 'tax'}>,
+        <Axes: title={'center': 'ptratio'}>,
+        <Axes: title={'center': 'b'}>],
+       [<Axes: title={'center': 'lstat'}>,
+        <Axes: title={'center': 'medv'}>, <Axes: >, <Axes: >]],
+      dtype=object)
+
+corr = data.corr()
+sns.heatmap(corr, cbar=True, square= True, fmt='.1f', annot=True, annot_kws={'size':15}, cmap='Greens')
+corr["b"].sort_values(ascending=False)
+b          1.000000
+medv       0.333461
+dis        0.291512
+zn         0.175520
+rm         0.128069
+chas       0.048788
+ptratio   -0.177383
+age       -0.273534
+indus     -0.356977
+lstat     -0.366087
+nox       -0.380051
+crim      -0.385064
+tax       -0.441808
+rad       -0.444413
+Name: b, dtype: float64
+
+sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data)axes[0, 0].set_title('aaa')
+  Cell In[28], line 1
+    sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data)axes[0, 0].set_title('aaa')
+                                                              ^
+SyntaxError: invalid syntax
+sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data).axes[0, 0].set_title('aaa')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[29], line 1
+----> 1 sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data).axes[0, 0].set_title('aaa')
+
+NameError: name 'axes' is not defined
+axes = plt.subplots(1, 1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[30], line 1
+----> 1 axes = plt.subplots(1, 1)
+
+NameError: name 'plt' is not defined
+import matplotlib.pyplot as plt
+axes = plt.subplots(1, 1)
+
+sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data).axes[0, 0].set_title('aaa')
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[33], line 1
+----> 1 sns.scatterplot(ax=axes[0, 0], x='crim', y='b', data=data).axes[0, 0].set_title('aaa')
+
+TypeError: tuple indices must be integers or slices, not tuple
+imputer = SimpleImputer(strategy='mean')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[34], line 1
+----> 1 imputer = SimpleImputer(strategy='mean')
+
+NameError: name 'SimpleImputer' is not defined
+import SimpleImputer
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[35], line 1
+----> 1 import SimpleImputer
+
+ModuleNotFoundError: No module named 'SimpleImputer'
+from sklearn.preprocessing import SimpleImputer
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+Cell In[36], line 1
+----> 1 from sklearn.preprocessing import SimpleImputer
+
+ImportError: cannot import name 'SimpleImputer' from 'sklearn.preprocessing' (C:\Users\81807\anaconda3\Lib\site-packages\sklearn\preprocessing\__init__.py)
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(strategy='mean')
+X_imputed = imputer.fit_transform(X)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[39], line 1
+----> 1 X_imputed = imputer.fit_transform(X)
+
+NameError: name 'X' is not defined
+X_imputed = imputer.fit_transform("b")
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[40], line 1
+----> 1 X_imputed = imputer.fit_transform("b")
+
+File ~\anaconda3\Lib\site-packages\sklearn\utils\_set_output.py:295, in _wrap_method_output.<locals>.wrapped(self, X, *args, **kwargs)
+    293 @wraps(f)
+    294 def wrapped(self, X, *args, **kwargs):
+--> 295     data_to_wrap = f(self, X, *args, **kwargs)
+    296     if isinstance(data_to_wrap, tuple):
+    297         # only wrap the first output for cross decomposition
+    298         return_tuple = (
+    299             _wrap_data_with_container(method, data_to_wrap[0], X, self),
+    300             *data_to_wrap[1:],
+    301         )
+
+File ~\anaconda3\Lib\site-packages\sklearn\base.py:1098, in TransformerMixin.fit_transform(self, X, y, **fit_params)
+   1083         warnings.warn(
+   1084             (
+   1085                 f"This object ({self.__class__.__name__}) has a `transform`"
+   (...)
+   1093             UserWarning,
+   1094         )
+   1096 if y is None:
+   1097     # fit method of arity 1 (unsupervised transformation)
+-> 1098     return self.fit(X, **fit_params).transform(X)
+   1099 else:
+   1100     # fit method of arity 2 (supervised transformation)
+   1101     return self.fit(X, y, **fit_params).transform(X)
+
+File ~\anaconda3\Lib\site-packages\sklearn\base.py:1474, in _fit_context.<locals>.decorator.<locals>.wrapper(estimator, *args, **kwargs)
+   1467     estimator._validate_params()
+   1469 with config_context(
+   1470     skip_parameter_validation=(
+   1471         prefer_skip_nested_validation or global_skip_validation
+   1472     )
+   1473 ):
+-> 1474     return fit_method(estimator, *args, **kwargs)
+
+File ~\anaconda3\Lib\site-packages\sklearn\impute\_base.py:410, in SimpleImputer.fit(self, X, y)
+    392 @_fit_context(prefer_skip_nested_validation=True)
+    393 def fit(self, X, y=None):
+    394     """Fit the imputer on `X`.
+    395 
+    396     Parameters
+   (...)
+    408         Fitted estimator.
+    409     """
+--> 410     X = self._validate_input(X, in_fit=True)
+    412     # default fill_value is 0 for numerical input and "missing_value"
+    413     # otherwise
+    414     if self.fill_value is None:
+
+File ~\anaconda3\Lib\site-packages\sklearn\impute\_base.py:337, in SimpleImputer._validate_input(self, X, in_fit)
+    331 if "could not convert" in str(ve):
+    332     new_ve = ValueError(
+    333         "Cannot use {} strategy with non-numeric data:\n{}".format(
+    334             self.strategy, ve
+    335         )
+    336     )
+--> 337     raise new_ve from None
+    338 else:
+    339     raise ve
+
+ValueError: Cannot use mean strategy with non-numeric data:
+could not convert string to float: 'b'
+X_imputed = imputer.fit_transform("zn")
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[41], line 1
+----> 1 X_imputed = imputer.fit_transform("zn")
+
+File ~\anaconda3\Lib\site-packages\sklearn\utils\_set_output.py:295, in _wrap_method_output.<locals>.wrapped(self, X, *args, **kwargs)
+    293 @wraps(f)
+    294 def wrapped(self, X, *args, **kwargs):
+--> 295     data_to_wrap = f(self, X, *args, **kwargs)
+    296     if isinstance(data_to_wrap, tuple):
+    297         # only wrap the first output for cross decomposition
+    298         return_tuple = (
+    299             _wrap_data_with_container(method, data_to_wrap[0], X, self),
+    300             *data_to_wrap[1:],
+    301         )
+
+File ~\anaconda3\Lib\site-packages\sklearn\base.py:1098, in TransformerMixin.fit_transform(self, X, y, **fit_params)
+   1083         warnings.warn(
+   1084             (
+   1085                 f"This object ({self.__class__.__name__}) has a `transform`"
+   (...)
+   1093             UserWarning,
+   1094         )
+   1096 if y is None:
+   1097     # fit method of arity 1 (unsupervised transformation)
+-> 1098     return self.fit(X, **fit_params).transform(X)
+   1099 else:
+   1100     # fit method of arity 2 (supervised transformation)
+   1101     return self.fit(X, y, **fit_params).transform(X)
+
+File ~\anaconda3\Lib\site-packages\sklearn\base.py:1474, in _fit_context.<locals>.decorator.<locals>.wrapper(estimator, *args, **kwargs)
+   1467     estimator._validate_params()
+   1469 with config_context(
+   1470     skip_parameter_validation=(
+   1471         prefer_skip_nested_validation or global_skip_validation
+   1472     )
+   1473 ):
+-> 1474     return fit_method(estimator, *args, **kwargs)
+
+File ~\anaconda3\Lib\site-packages\sklearn\impute\_base.py:410, in SimpleImputer.fit(self, X, y)
+    392 @_fit_context(prefer_skip_nested_validation=True)
+    393 def fit(self, X, y=None):
+    394     """Fit the imputer on `X`.
+    395 
+    396     Parameters
+   (...)
+    408         Fitted estimator.
+    409     """
+--> 410     X = self._validate_input(X, in_fit=True)
+    412     # default fill_value is 0 for numerical input and "missing_value"
+    413     # otherwise
+    414     if self.fill_value is None:
+
+File ~\anaconda3\Lib\site-packages\sklearn\impute\_base.py:337, in SimpleImputer._validate_input(self, X, in_fit)
+    331 if "could not convert" in str(ve):
+    332     new_ve = ValueError(
+    333         "Cannot use {} strategy with non-numeric data:\n{}".format(
+    334             self.strategy, ve
+    335         )
+    336     )
+--> 337     raise new_ve from None
+    338 else:
+    339     raise ve
+
+ValueError: Cannot use mean strategy with non-numeric data:
+could not convert string to float: 'zn'
+from sklearn.preprocessing import StandardScaler 
+scaler = StandardScaler() 
+X_scaled = scaler.fit_transform(X)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[44], line 1
+----> 1 X_scaled = scaler.fit_transform(X)
+
+NameError: name 'X' is not defined
+X = data.drop(['PRICE'], axis = 1)
+[1;31m---------------------------------------------------------------------------[0m
+df2 = pd.DataFrame(imputer.fit_transform(df))
+df2.columns = df.columns
+imputer = SimpleImputer(strategy='mean')
+df_cleaned = df.dropna()
+X_imputed = imputer.fit_transform(X)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[50], line 1
+----> 1 X_imputed = imputer.fit_transform(X)
+
+NameError: name 'X' is not defined
+X = data.drop(['PRICE'], axis = 1)
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[51], line 1
+----> 1 X = data.drop(['PRICE'], axis = 1)
+
+File ~\anaconda3\Lib\site-packages\pandas\core\frame.py:5568, in DataFrame.drop(self, labels, axis, index, columns, level, inplace, errors)
+   5420 def drop(
+   5421     self,
+   5422     labels: IndexLabel | None = None,
+   (...)
+   5429     errors: IgnoreRaise = "raise",
+   5430 ) -> DataFrame | None:
+   5431     """
+   5432     Drop specified labels from rows or columns.
+   5433 
+   (...)
+   5566             weight  1.0     0.8
+   5567     """
+-> 5568     return super().drop(
+   5569         labels=labels,
+   5570         axis=axis,
+   5571         index=index,
+   5572         columns=columns,
+   5573         level=level,
+   5574         inplace=inplace,
+   5575         errors=errors,
+   5576     )
+
+File ~\anaconda3\Lib\site-packages\pandas\core\generic.py:4785, in NDFrame.drop(self, labels, axis, index, columns, level, inplace, errors)
+   4783 for axis, labels in axes.items():
+   4784     if labels is not None:
+-> 4785         obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+   4787 if inplace:
+   4788     self._update_inplace(obj)
+
+File ~\anaconda3\Lib\site-packages\pandas\core\generic.py:4827, in NDFrame._drop_axis(self, labels, axis, level, errors, only_slice)
+   4825         new_axis = axis.drop(labels, level=level, errors=errors)
+   4826     else:
+-> 4827         new_axis = axis.drop(labels, errors=errors)
+   4828     indexer = axis.get_indexer(new_axis)
+   4830 # Case for non-unique axis
+   4831 else:
+
+File ~\anaconda3\Lib\site-packages\pandas\core\indexes\base.py:7070, in Index.drop(self, labels, errors)
+   7068 if mask.any():
+   7069     if errors != "ignore":
+-> 7070         raise KeyError(f"{labels[mask].tolist()} not found in axis")
+   7071     indexer = indexer[~mask]
+   7072 return self.delete(indexer)
+
+KeyError: "['PRICE'] not found in axis"
+y = data['PRICE']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\Lib\site-packages\pandas\core\indexes\base.py:3805, in Index.get_loc(self, key)
+   3804 try:
+-> 3805     return self._engine.get_loc(casted_key)
+   3806 except KeyError as err:
+
+File index.pyx:167, in pandas._libs.index.IndexEngine.get_loc()
+
+File index.pyx:196, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\\_libs\\hashtable_class_helper.pxi:7081, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\\_libs\\hashtable_class_helper.pxi:7089, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'PRICE'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[52], line 1
+----> 1 y = data['PRICE']
+
+File ~\anaconda3\Lib\site-packages\pandas\core\frame.py:4090, in DataFrame.__getitem__(self, key)
+   4088 if self.columns.nlevels > 1:
+   4089     return self._getitem_multilevel(key)
+-> 4090 indexer = self.columns.get_loc(key)
+   4091 if is_integer(indexer):
+   4092     indexer = [indexer]
+
+File ~\anaconda3\Lib\site-packages\pandas\core\indexes\base.py:3812, in Index.get_loc(self, key)
+   3807     if isinstance(casted_key, slice) or (
+   3808         isinstance(casted_key, abc.Iterable)
+   3809         and any(isinstance(x, slice) for x in casted_key)
+   3810     ):
+   3811         raise InvalidIndexError(key)
+-> 3812     raise KeyError(key) from err
+   3813 except TypeError:
+   3814     # If we have a listlike key, _check_indexing_error will raise
+   3815     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3816     #  the TypeError.
+   3817     self._check_indexing_error(key)
+
+KeyError: 'PRICE'
+Selection deleted
+> output.txt
+  Cell In[53], line 1
+    > output.txt
+    ^
+SyntaxError: invalid syntax
+console command1 > output.txt
+  Cell In[54], line 1
+    console command1 > output.txt
+            ^
+SyntaxError: invalid syntax
+cmd   /? >c:\cmd.txt
+  Cell In[55], line 1
+    cmd   /? >c:\cmd.txt
+           ^
+SyntaxError: invalid syntax
+jupyter nbconvert
+  Cell In[56], line 1
+    jupyter nbconvert
+            ^
+SyntaxError: invalid syntax
+X = data.drop('medv', axis=1)
+y = data['medv']
+X_imputed = imputer.fit_transform(X)
+from sklearn.preprocessing import StandardScaler  
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+from sklearn.preprocessing import MinMaxScale
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+Cell In[63], line 1
+----> 1 from sklearn.preprocessing import MinMaxScale
+
+ImportError: cannot import name 'MinMaxScale' from 'sklearn.preprocessing' (C:\Users\81807\anaconda3\Lib\site-packages\sklearn\preprocessing\__init__.py)
+scaler = MinMaxScaler()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[64], line 1
+----> 1 scaler = MinMaxScaler()
+
+NameError: name 'MinMaxScaler' is not defined
+pip install --upgrade scikit-learn
+Requirement already satisfied: scikit-learn in c:\users\81807\anaconda3\lib\site-packages (1.4.2)
+Collecting scikit-learn
+  Downloading scikit_learn-1.5.0-cp311-cp311-win_amd64.whl.metadata (11 kB)
+Requirement already satisfied: numpy>=1.19.5 in c:\users\81807\anaconda3\lib\site-packages (from scikit-learn) (1.26.4)
+Requirement already satisfied: scipy>=1.6.0 in c:\users\81807\anaconda3\lib\site-packages (from scikit-learn) (1.11.4)
+Requirement already satisfied: joblib>=1.2.0 in c:\users\81807\anaconda3\lib\site-packages (from scikit-learn) (1.2.0)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn)
+  Downloading threadpoolctl-3.5.0-py3-none-any.whl.metadata (13 kB)
+Downloading scikit_learn-1.5.0-cp311-cp311-win_amd64.whl (11.0 MB)
+   ---------------------------------------- 0.0/11.0 MB ? eta -:--:--
+   -- ------------------------------------- 0.6/11.0 MB 17.0 MB/s eta 0:00:01
+   ------- -------------------------------- 2.0/11.0 MB 25.2 MB/s eta 0:00:01
+   ----------- ---------------------------- 3.1/11.0 MB 24.7 MB/s eta 0:00:01
+   --------------- ------------------------ 4.3/11.0 MB 24.8 MB/s eta 0:00:01
+   ---------------- ----------------------- 4.5/11.0 MB 20.4 MB/s eta 0:00:01
+   ----------------- ---------------------- 4.7/11.0 MB 17.7 MB/s eta 0:00:01
+   -------------------- ------------------- 5.6/11.0 MB 18.8 MB/s eta 0:00:01
+   ---------------------- ----------------- 6.3/11.0 MB 18.2 MB/s eta 0:00:01
+   -------------------------- ------------- 7.2/11.0 MB 18.3 MB/s eta 0:00:01
+   ----------------------------- ---------- 8.1/11.0 MB 18.4 MB/s eta 0:00:01
+   -------------------------------- ------- 8.8/11.0 MB 18.8 MB/s eta 0:00:01
+   ------------------------------------ --- 9.9/11.0 MB 19.2 MB/s eta 0:00:01
+   ---------------------------------------  11.0/11.0 MB 19.8 MB/s eta 0:00:01
+   ---------------------------------------- 11.0/11.0 MB 18.7 MB/s eta 0:00:00
+Downloading threadpoolctl-3.5.0-py3-none-any.whl (18 kB)
+Installing collected packages: threadpoolctl, scikit-learn
+  Attempting uninstall: threadpoolctl
+    Found existing installation: threadpoolctl 2.2.0
+    Uninstalling threadpoolctl-2.2.0:
+      Successfully uninstalled threadpoolctl-2.2.0
+  Attempting uninstall: scikit-learn
+    Found existing installation: scikit-learn 1.4.2
+    Uninstalling scikit-learn-1.4.2:
+      Successfully uninstalled scikit-learn-1.4.2
+Successfully installed scikit-learn-1.5.0 threadpoolctl-3.5.0
+Note: you may need to restart the kernel to use updated packages.
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+X_normalized = scaler.fit_transform(X)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print X_train.shape
+  Cell In[71], line 1
+    print X_train.shape
+    ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+print(X_train.shape)
+(404, 13)
+from sklearn import linear_model
+clf = linear_model.LinearRegression()
+clf.fit(X_train, y_train)
+
+  LinearRegression?i
+LinearRegression()
+print(clf.intercept_)
+30.246750993923865
+Selection deleted
+print(clf.coef_)
+[-1.13055924e-01  3.01104641e-02  4.03807204e-02  2.78443820e+00
+ -1.72026334e+01  4.43883520e+00 -6.29636221e-03 -1.44786537e+00
+  2.62429736e-01 -1.06467863e-02 -9.15456240e-01  1.23513347e-02
+ -5.08571424e-01]
+clf.predict(x_test)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[78], line 1
+----> 1 clf.predict(x_test)
+
+NameError: name 'x_test' is not defined
+clf.predict(X_test)
+array([28.99672362, 36.02556534, 14.81694405, 25.03197915, 18.76987992,
+       23.25442929, 17.66253818, 14.34119   , 23.01320703, 20.63245597,
+       24.90850512, 18.63883645, -6.08842184, 21.75834668, 19.23922576,
+       26.19319733, 20.64773313,  5.79472718, 40.50033966, 17.61289074,
+       27.24909479, 30.06625441, 11.34179277, 24.16077616, 17.86058499,
+       15.83609765, 22.78148106, 14.57704449, 22.43626052, 19.19631835,
+       22.43383455, 25.21979081, 25.93909562, 17.70162434, 16.76911711,
+       16.95125411, 31.23340153, 20.13246729, 23.76579011, 24.6322925 ,
+       13.94204955, 32.25576301, 42.67251161, 17.32745046, 27.27618614,
+       16.99310991, 14.07009109, 25.90341861, 20.29485982, 29.95339638,
+       21.28860173, 34.34451856, 16.04739105, 26.22562412, 39.53939798,
+       22.57950697, 18.84531367, 32.72531661, 25.0673037 , 12.88628956,
+       22.68221908, 30.48287757, 31.52626806, 15.90148607, 20.22094826,
+       16.71089812, 20.52384893, 25.96356264, 30.61607978, 11.59783023,
+       20.51232627, 27.48111878, 11.01962332, 15.68096344, 23.79316251,
+        6.19929359, 21.6039073 , 41.41377225, 18.76548695,  8.87931901,
+       20.83076916, 13.25620627, 20.73963699,  9.36482222, 23.22444271,
+       31.9155003 , 19.10228271, 25.51579303, 29.04256769, 20.14358566,
+       25.5859787 ,  5.70159447, 20.09474756, 14.95069156, 12.50395648,
+       20.72635294, 24.73957161, -0.164237  , 13.68486682, 16.18359697,
+       22.27621999, 24.47902364])
+score = clf.score(x_test, y_test)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[80], line 1
+----> 1 score = clf.score(x_test, y_test)
+
+NameError: name 'x_test' is not defined
+
+score = clf.score(X_test, Y_test)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[81], line 1
+----> 1 score = clf.score(X_test, Y_test)
+
+NameError: name 'Y_test' is not defined
+score = clf.score(X_test, y_test)
+print(score)
+0.6687594935356326
+from sklearn.model_selection import cross_val_score 
+scores = cross_val_score(model, X, y, cv=5)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[85], line 1
+----> 1 scores = cross_val_score(model, X, y, cv=5)
+
+NameError: name 'model' is not defined
+scores = cross_val_score(clf, X, y, cv=5)
+print("Cross-validation scores:", scores)
+Cross-validation scores: [ 0.63919994  0.71386698  0.58702344  0.07923081 -0.25294154]
